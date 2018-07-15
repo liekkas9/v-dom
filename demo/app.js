@@ -10,7 +10,9 @@ function createComponent(count) {
 }
 
 function inc(parent, count) {
-    if (count > 10) return;
+    if (count > 5) {
+        return false;
+    }
     setState(parent, createComponent(count), createComponent(count + 1));
 
     setTimeout(() => inc(parent, count + 1), 500);

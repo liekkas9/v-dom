@@ -4,7 +4,6 @@ const patch = require('./patch');
 const {setProps} = require('./DOM');
 
 function render(element, node) {
-    console.log(element);
     node.appendChild(mountElement(element));
 }
 
@@ -27,7 +26,6 @@ function hyperscript(type, props, children) {
  */
 function setState(parent, prevElement, nextElement) {
     const p = diff(prevElement, nextElement);
-    console.log(p);
     patch(parent, p);
 }
 
