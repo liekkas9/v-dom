@@ -25,7 +25,12 @@ function hyperscript(type, props, children) {
  * In react, setState is the entry so here we keep the consistency
  */
 function setState(parent, prevElement, nextElement) {
+    // 先拿到 patch
     const p = diff(prevElement, nextElement);
+
+    /**
+     * 目测是把 path 转化成为真实的 dom，然后操作
+     */
     patch(parent, p);
 }
 

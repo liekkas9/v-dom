@@ -1,7 +1,7 @@
 const {setProps} = require('./DOM');
 
 /**
- * element => real dom node
+ * javascript generate real dom，其实就是典型的递归操作！代码倒是很可取~ 非常有用！
  */
 function mountElement(element) {
     // node 是真实节点，element 是{}，切记！
@@ -32,9 +32,7 @@ function mountElement(element) {
             element.children
                 .map(mountElement)
                 // 此处也可以改用箭头函数
-                .forEach((item) => {
-                    node.appendChild(item);
-                });
+                .forEach(node.appendChild, node);
         }
     }
     return node;

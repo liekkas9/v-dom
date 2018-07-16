@@ -2,6 +2,10 @@
 
 > :point_right: A minimal implementation of the Virtual DOM
 
+## run 起来
+
+直接 cd 进入 demo 文件夹，npm run watch 即可，src 文件夹的 scripts 是唬人的。
+
 ## What's a Virtual DOM
 
 Let's talk about **Real DOM** first.

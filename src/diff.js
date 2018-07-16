@@ -1,6 +1,3 @@
-const mountElement = require('./mountElement');
-const {setProp, removeProp} = require('./DOM');
-
 function changed(node1, node2) {
     /**
      * 1. 本身的类型换了，比如 div（object）变为 string（"AAAA"）
@@ -13,18 +10,30 @@ function changed(node1, node2) {
         || (typeof node1 === 'string' && node1 !== node2);
 }
 
+/**
+ *  diff 是 diff 的{}，后续还会多次被调用到
+ */
 function diff(prevElement, nextElement) {
+    /**
+     * 当前是第一次插入节点，则 create
+     */
     if (!prevElement) {
         return {
             type: 'CREATE',
             node: nextElement
         };
     }
+    /**
+     * 没有后续了，则代表着删除
+     */
     if (!nextElement) {
         return {
             type: 'REMOVE'
         };
     }
+    /**
+     * 对于element 而言，change 是本质的改变
+     */
     if (changed(prevElement, nextElement)) {
         return {
             type: 'REPLACE',
@@ -41,6 +50,13 @@ function diff(prevElement, nextElement) {
      * 2. 处理子节点的变动
      */
     if (nextElement.type) {
+        if (diffChildren(prevElement.children, nextElement.children).length) {
+            console.log({
+                type: 'UPDATE',
+                propsPatches: diffProps(prevElement.props, nextElement.props),
+                childrenPatches: diffChildren(prevElement.children, nextElement.children)
+            });
+        }
         return {
             type: 'UPDATE',
             propsPatches: diffProps(prevElement.props, nextElement.props),
