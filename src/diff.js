@@ -12,6 +12,9 @@ function changed(node1, node2) {
 
 /**
  *  diff 是 diff 的{}，后续还会多次被调用到
+ *  其实还是有不合理的地方，比如 pre ul>li,li,li ，next  ul>li,p,li,li
+ *  从从第二个开始就走的 replace，最后一个走的是 create
+ *  更好的思路：后面两个 li 整体复制、不变更……也就是 virtual-dom diff 涉及到算法的部分吧
  */
 function diff(prevElement, nextElement) {
     /**

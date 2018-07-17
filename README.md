@@ -6,6 +6,12 @@
 
 直接 cd 进入 demo 文件夹，npm run watch 即可，src 文件夹的 scripts 是唬人的。
 
+## 我理解的原理
+
+- setState 时比较 pre、next，递归拿到变动，即使没有变动也要返回空对象来占位；
+- patch 会拿到 diff，实际上结构跟 next 一模一样，然后对照现有的 dom，一个一个的改（所谓 patch）
+- mount 就是给一个节点，深度遍历，render 该节点对应的真实 dom，该方法会在 patch 中反复被调用。
+
 ## What's a Virtual DOM
 
 Let's talk about **Real DOM** first.
